@@ -168,9 +168,7 @@ class LinkedListTestCase(unittest.TestCase):
 
     def test_add_equals_list(self):
         my_list = LinkedList()
-        print(type(my_list), str(my_list))
-        my_list = my_list + LinkedList([1, 2])
-        print(type(my_list),str(my_list))
+        my_list += LinkedList([1, 2])
         self.assertEqual(my_list, LinkedList([1, 2]))
 
         my_list = LinkedList([1, 2])
