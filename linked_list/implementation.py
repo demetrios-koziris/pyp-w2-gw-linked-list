@@ -27,17 +27,15 @@ class LinkedList(AbstractLinkedList):
         return reduce(lambda x,y: x+1, [node for node in self], 0)
                 
     def __iter__(self):
-        if self.start is None:
-            raise StopIteration()
-        else:
-            pointer = self.start
-            while not pointer is self.end:
-                yield pointer
-                pointer = pointer.next
+        pointer = self.start
+        while not pointer is None:
             yield pointer
-            raise StopIteration()
+            pointer = pointer.next
+        raise StopIteration()
 
     def __getitem__(self, index):
+        if index < 0 or index > len(self)-1:
+            raise IndexError("Index out of Range")
         for i, node in enumerate(self):
             if i == index:
                 return node
@@ -52,12 +50,9 @@ class LinkedList(AbstractLinkedList):
 
     def __iadd__(self, other):
         '''Must be another node'''
-        new_ll = LinkedList()
-        for node in self:
-            new_ll.append(node.elem)
         for node in other:
-            new_ll.append(node.elem)
-        return new_ll
+            self.append(node.elem)
+        return self
 
     def __eq__(self, other):
         if len(self) != len(other):
@@ -80,10 +75,9 @@ class LinkedList(AbstractLinkedList):
         return len(self)
 
     def pop(self, index=None):
+        # default index should be the end node
         if index is None:
             index = len(self)-1
-        if index < 0 or index > len(self)-1:
-            raise IndexError("Index out of Range")
         popped_node = self[index]
         if len(self) == 1:
             self.start = None
