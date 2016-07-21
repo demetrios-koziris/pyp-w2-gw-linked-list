@@ -14,13 +14,7 @@ class LinkedList(AbstractLinkedList):
             self.append(elem)
 
     def __str__(self):
-        return_string = "["
-        for node in self:
-            return_string += str(node)
-            if not node is self.end:
-                return_string += ", "
-        return_string += "]"
-        return return_string
+        return str([node.elem for node in self])
 
     def __len__(self):
         return reduce(lambda x,y: x+1, [node for node in self], 0)
