@@ -8,7 +8,6 @@ class LinkedList(AbstractLinkedList):
     """
 
     def __init__(self, elements=[]):
-        #self.elements = elements
         self.start = None
         self.end = None
         for elem in elements:
@@ -49,7 +48,6 @@ class LinkedList(AbstractLinkedList):
         return new_ll
 
     def __iadd__(self, other):
-        '''Must be another node'''
         for node in other:
             self.append(node.elem)
         return self
@@ -88,4 +86,4 @@ class LinkedList(AbstractLinkedList):
             if popped_node is self.end:
                 self.end = self[index-1]
             self[index-1].next = popped_node.next
-        return popped_node
+        return popped_node.elem
